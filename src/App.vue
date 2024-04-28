@@ -12,8 +12,6 @@
   </div>
 </template>
 
-
-
 <script>
 import PageHeader from './components/PageHeader'
 import AddTasks from './components/AddTasks'
@@ -21,45 +19,57 @@ import InsertTask from './components/InsertTask'
 
 export default {
   name: 'App',
+
   components: {
     PageHeader,
     AddTasks,
-    InsertTask
+    InsertTask,
   },
-  data(){
+
+  data() {
     return {
       tasks: [],
       showAddTask: false,
       newTaskDescription: '',
-      newTaskCompleted: false
-    }
+      newTaskCompleted: false,
+    };
   },
+
   methods: {
     fetchTasks() {
-      this.$http.get('http://localhost:3030/tasks')
+      this.$http
+        .get('http://localhost:3030/tasks')
         .then(response => {
-          console.log(response.data)
+          console.log(response.data);
           this.tasks = response.data;
         })
         .catch(error => {
           console.error("There was an error fetching the tasks:", error);
         });
     },
-    toggleAddTask(){
-      this.showAddTask = !this.showAddTask
-    },
-   
-    deleteTask(id){
-      if(confirm('Are you sure')){
-      this.tasks = this.tasks.filter((task) => task.id !== id)}
-    },
-    toggleReminder(id){
-      this.tasks = this.tasks.map((task) => task.id === id 
-      ? {...task, reminder: !task.reminder} : task)
 
-    }
+    toggleAddTask() {
+      this.showAddTask = !this.showAddTask;
+    },
+    
+    deleteTask(id) {
+      if (confirm('Are you sure')) {
+        this.tasks = this.tasks.filter((task) => task.id !== id);
+      }
+    },
+
+    toggleReminder(id) {
+      this.tasks = this.tasks.map(
+        (task) => (
+          task.id === id
+          ? { ...task, reminder: !task.reminder }
+          : task
+        )
+      );
+    },
   },
-  mounted(){
+
+  mounted() {
     const task = this.fetchTasks();
     console.log('task', task)
   },
@@ -69,7 +79,6 @@ export default {
 <style>
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
-
 
 * {
   box-sizing: border-box;
@@ -117,5 +126,4 @@ body {
   display: block;
   width: 100%;
 }
-
 </style>

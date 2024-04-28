@@ -1,13 +1,13 @@
 <template>
   <form @submit="onSubmit" class="add-form">
     <div class="form-control">
-      <label>Task</label>
+      <label>Title</label>
       
       <input 
         type="text" 
         v-model="text" 
         name="text" 
-        placeholder="Add Task" 
+        :placeholder="defaultTitle" 
       />
     </div>
     <div class="form-control">
@@ -17,22 +17,22 @@
         type="text"
         v-model="day"
         name="day"
-        placeholder="Add Day & Time"
+        placeholder="yyyy-mm-dd HH:MM"
       />
     </div>
     <div class="form-control form-control-check">
       <label>Set Reminder</label>
       
       <input 
-      type="checkbox" 
-      v-model="reminder" 
-      name="reminder" 
+        type="checkbox" 
+        v-model="reminder" 
+        name="reminder" 
       />
     </div>
     
     <input 
       type="submit" 
-      value="Save Task" 
+      value="Add Task" 
       class="btn btn-block" 
     />
   </form>
@@ -46,6 +46,7 @@ export default{
     return {
       text: '',
       day: '',
+      defaultTitle: 'Untitled',
       reminder: false,
     };
   },
@@ -61,7 +62,8 @@ export default{
       
       const newTask = {
         id: Math.floor(Math.random() * 100000),
-        description: this.text,
+        // XXX description? this.text?
+        description: this.text || this.defaultTitle,
         day: this.day,
         // XXX ???
         // reminder: this.reminder,

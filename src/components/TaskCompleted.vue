@@ -7,7 +7,7 @@
 import OnlyTask from './OnlyTask.vue';
 
 export default {
-  name : "AddTasks",
+  name : "TaskCompleted",
   props :{
     tasks: {
       type: Array,

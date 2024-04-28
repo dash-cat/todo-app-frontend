@@ -17,4 +17,8 @@ export default class Client {
   async createTask(task) {
     return axios.post(`${baseURL}/tasks`, task);
   }
+
+  async deleteTaskWithId(id) {
+    return axios.delete(`${baseURL}/tasks/${id}`);
+  }
 }

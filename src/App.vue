@@ -50,9 +50,17 @@ export default {
       this.showAddTask = !this.showAddTask;
     },
     
-    deleteTask(id) {
+    async deleteTask(id) {
       if (confirm('Are you sure')) {
-        this.tasks = this.tasks.filter((task) => task.id !== id);
+        try {
+          await this.$client.deleteTaskWithId(id);
+          this.tasks = this.tasks.filter((task) => task.id !== id);
+        } catch (error) {
+          const message = `Failed to delete a task`;
+
+          alert(message);
+          console.error(`${message}: ${error}`);
+        }
       }
     },
 

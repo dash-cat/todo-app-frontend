@@ -4,23 +4,21 @@
       <label>Task</label>
       
       <input 
-      type="text" 
-      v-model="text" 
-      name="text" 
-      placeholder="Add Task" 
+        type="text" 
+        v-model="text" 
+        name="text" 
+        placeholder="Add Task" 
       />
-      
     </div>
     <div class="form-control">
       <label>Day & Time</label>
       
       <input
-      type="text"
-      v-model="day"
-      name="day"
-      placeholder="Add Day & Time"
+        type="text"
+        v-model="day"
+        name="day"
+        placeholder="Add Day & Time"
       />
-      
     </div>
     <div class="form-control form-control-check">
       <label>Set Reminder</label>
@@ -30,7 +28,6 @@
       v-model="reminder" 
       name="reminder" 
       />
-      
     </div>
     
     <input 
@@ -38,7 +35,6 @@
       value="Save Task" 
       class="btn btn-block" 
     />
-    
   </form>
 </template>
 
@@ -67,9 +63,9 @@ export default{
         id: Math.floor(Math.random() * 100000),
         description: this.text,
         day: this.day,
+        // XXX ???
         // reminder: this.reminder,
       }
-      
       
       console.log('UII', newTask);
       this.$client.createTask(newTask);

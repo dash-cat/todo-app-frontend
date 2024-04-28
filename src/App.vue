@@ -1,14 +1,19 @@
 <template>
   <div class="container">
     <PageHeader 
-    @toggle-add-task="toggleAddTask"
-    title="Task Tracker" :showAddTask = "showAddTask" />
+      @toggle-add-task="toggleAddTask"
+      title="Task Tracker" :showAddTask = "showAddTask"
+    />
+    
     <div v-show="showAddTask">
       <InsertTask @insert-task="addTask"/>
     </div>
-    <AddTasks @toggle-reminder="toggleReminder" 
-    @delete-task="deleteTask" 
-    :tasks="tasks"/>
+
+    <AddTasks
+      @toggle-reminder="toggleReminder" 
+      @delete-task="deleteTask" 
+      :tasks="tasks"
+    />
   </div>
 </template>
 

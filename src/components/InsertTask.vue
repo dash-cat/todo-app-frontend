@@ -69,7 +69,7 @@ export default{
         // reminder: this.reminder,
       }
       
-      console.log('UII', newTask);
+      this.$log('UII', newTask);
       this.$client.createTask(newTask);
       this.$emit('insert-task', newTask);
       

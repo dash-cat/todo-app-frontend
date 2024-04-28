@@ -4,7 +4,7 @@
       @toggle-add-task="toggleAddTask"
       title="Task Tracker" :showAddTask = "showAddTask"
     />
-    
+
     <div v-show="showAddTask">
       <InsertTask @insert-task="addTask"/>
     </div>
@@ -44,11 +44,11 @@ export default {
     async fetchTasks() {
       try {
         const response = await this.$client.getTasks();
-        console.log('fetchTasks(): response.data =', response.data);
+        this.$log('fetchTasks(): response.data =', response.data);
         this.tasks = response.data;
       } catch (error) {
         alert('Failed to fetch tasks');
-        console.error("There was an error fetching the tasks:", error);
+        this.$spew("There was an error fetching the tasks:", error);
       }
     },
 
@@ -83,7 +83,7 @@ export default {
 
   mounted() {
     const task = this.fetchTasks();
-    console.log('task', task)
+    this.$log('task', task)
   },
 }
 </script>

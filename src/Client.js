@@ -1,12 +1,13 @@
 import axios from 'axios';
 
+const baseURL = 'http://localhost:3030';
+
 export default class Client {
   async getTasks() {
-    return axios.get('http://localhost:3030/tasks');
+    return axios.get(`${baseURL}/tasks`);
   }
 
   /**
-   * 
    * @param {object} task
    * @param {string} task.id
    * @param {string} task.description
@@ -14,6 +15,6 @@ export default class Client {
    * @returns 
    */
   async createTask(task) {
-    return axios.post('http://localhost:3030/tasks', task);
+    return axios.post(`${baseURL}/tasks`, task);
   }
 }

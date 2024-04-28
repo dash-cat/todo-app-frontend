@@ -49,7 +49,8 @@ export default{
         return {
             text: '',
             day: '',
-            reminder: false
+            reminder: false,
+           
         }
     },
     methods: {
@@ -63,19 +64,22 @@ export default{
 
             const newTask = {
                 id: Math.floor(Math.random() * 100000),
-                text: this.text,
+                description: this.text,
                 day: this.day,
-                reminder: this.reminder,
+                // reminder: this.reminder,
             }
+           
 
+            console.log('UII', newTask)
+            this.$http.post('http://localhost:3030/tasks', newTask)
             this.$emit('insert-task', newTask)
 
             this.text = ''
             this.day = ''
             this.reminder = false
             
-        }
-    }
+        },
+      }
 }
 </script>
 

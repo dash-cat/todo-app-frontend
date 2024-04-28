@@ -29,16 +29,26 @@ export default {
   data(){
     return {
       tasks: [],
-      showAddTask: false
+      showAddTask: false,
+      newTaskDescription: '',
+      newTaskCompleted: false
     }
   },
   methods: {
+    fetchTasks() {
+      this.$http.get('http://localhost:3030/tasks')
+        .then(response => {
+          console.log(response.data)
+          this.tasks = response.data;
+        })
+        .catch(error => {
+          console.error("There was an error fetching the tasks:", error);
+        });
+    },
     toggleAddTask(){
       this.showAddTask = !this.showAddTask
     },
-    addTask(task){
-      this.tasks = [...this.tasks, task]
-    },
+   
     deleteTask(id){
       if(confirm('Are you sure')){
       this.tasks = this.tasks.filter((task) => task.id !== id)}
@@ -49,28 +59,10 @@ export default {
 
     }
   },
-  created(){
-    this.tasks = [
-      {
-        id:1,
-        text: 'Doctors Appointment',
-        day: 'tuesday',
-        reminder: true,
-      },
-      {
-        id:2,
-        text: 'PTM',
-        day: 'wednesday',
-        reminder: false,
-      },
-      {
-        id:3,
-        text: 'Interview',
-        day: 'thursday',
-        reminder: true,
-      }
-    ]
-  }
+  mounted(){
+    const task = this.fetchTasks();
+    console.log('task', task)
+  },
 }
 </script>
 

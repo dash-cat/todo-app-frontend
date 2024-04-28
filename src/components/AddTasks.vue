@@ -5,10 +5,11 @@
     :task="task" />
 
     </div>
+    <TaskCompleted></TaskCompleted>
 </template>
 
 <script>
-import OnlyTask from "./OnlyTask.vue"
+import TaskCompleted from "./TaskCompleted.vue"
 
 export default {
     name : "AddTasks",
@@ -19,7 +20,8 @@ export default {
         }
     },
     components: {
-        OnlyTask
+        // XXX
+        // OnlyTask
     },
     emits: ['delete-task', 'toggle-reminder']
 }

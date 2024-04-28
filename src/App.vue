@@ -42,6 +42,7 @@ export default {
         console.log('fetchTasks(): response.data =', response.data);
         this.tasks = response.data;
       } catch (error) {
+        alert('Failed to fetch tasks');
         console.error("There was an error fetching the tasks:", error);
       }
     },

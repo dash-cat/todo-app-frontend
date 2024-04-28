@@ -36,16 +36,14 @@ export default {
   },
 
   methods: {
-    fetchTasks() {
-      this.$http
-        .get('http://localhost:3030/tasks')
-        .then(response => {
-          console.log(response.data);
-          this.tasks = response.data;
-        })
-        .catch(error => {
-          console.error("There was an error fetching the tasks:", error);
-        });
+    async fetchTasks() {
+      try {
+        const response = await this.$client.getTasks();
+        console.log('fetchTasks(): response.data =', response.data);
+        this.tasks = response.data;
+      } catch (error) {
+        console.error("There was an error fetching the tasks:", error);
+      }
     },
 
     toggleAddTask() {

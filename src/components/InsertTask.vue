@@ -1,88 +1,87 @@
 <template>
-    <form @submit="onSubmit" class="add-form">
-      <div class="form-control">
-        <label>Task</label>
-
-        <input 
-         type="text" 
-         v-model="text" 
-         name="text" 
-         placeholder="Add Task" 
-        />
-
-      </div>
-      <div class="form-control">
-        <label>Day & Time</label>
-
-        <input
-          type="text"
-          v-model="day"
-          name="day"
-          placeholder="Add Day & Time"
-        />
-
-      </div>
-      <div class="form-control form-control-check">
-        <label>Set Reminder</label>
-        
-        <input 
-         type="checkbox" 
-         v-model="reminder" 
-         name="reminder" 
-        />
+  <form @submit="onSubmit" class="add-form">
+    <div class="form-control">
+      <label>Task</label>
+      
+      <input 
+      type="text" 
+      v-model="text" 
+      name="text" 
+      placeholder="Add Task" 
+      />
       
     </div>
-  
-      <input 
-       type="submit" 
-       value="Save Task" 
-       class="btn btn-block" 
+    <div class="form-control">
+      <label>Day & Time</label>
+      
+      <input
+      type="text"
+      v-model="day"
+      name="day"
+      placeholder="Add Day & Time"
       />
+      
+    </div>
+    <div class="form-control form-control-check">
+      <label>Set Reminder</label>
+      
+      <input 
+      type="checkbox" 
+      v-model="reminder" 
+      name="reminder" 
+      />
+      
+    </div>
     
-    </form>
-  </template>
+    <input 
+      type="submit" 
+      value="Save Task" 
+      class="btn btn-block" 
+    />
+    
+  </form>
+</template>
 
 <script>
 export default{
-    name: 'InsertTask',
-    data(){
-        return {
-            text: '',
-            day: '',
-            reminder: false,
-           
-        }
-    },
-    methods: {
-        onSubmit(e){
-            e.preventDefault()
+  name: 'InsertTask',
+  
+  data() {
+    return {
+      text: '',
+      day: '',
+      reminder: false,
+    };
+  },
 
-            if(!this.text){
-                alert('PLease add a task')
-                return
-            }
-
-            const newTask = {
-                id: Math.floor(Math.random() * 100000),
-                description: this.text,
-                day: this.day,
-                // reminder: this.reminder,
-            }
-           
-
-            console.log('UII', newTask)
-            this.$http.post('http://localhost:3030/tasks', newTask)
-            this.$emit('insert-task', newTask)
-
-            this.text = ''
-            this.day = ''
-            this.reminder = false
-            
-        },
+  methods: {
+    onSubmit(e) {
+      e.preventDefault()
+      
+      if (!this.text){
+        alert('Please add a task');
+        return
       }
+      
+      const newTask = {
+        id: Math.floor(Math.random() * 100000),
+        description: this.text,
+        day: this.day,
+        // reminder: this.reminder,
+      }
+      
+      
+      console.log('UII', newTask);
+      this.$client.createTask(newTask);
+      this.$emit('insert-task', newTask);
+      
+      this.text = '';
+      this.day = '';
+      this.reminder = false;
+    },
+  },
 }
 </script>
-
 
 <style scoped>
 .add-form {
